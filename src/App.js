@@ -1,11 +1,13 @@
 import React from "react";
 import GlobalStyle from "./styles/global";
 
+import Sidebar from "./components/Sidebar";
+
 const App = () => {
   return (
     <>
       <GlobalStyle />
-      <h2>Teste</h2>
+      <Sidebar />
     </>
   );
 };
