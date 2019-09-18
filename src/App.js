@@ -1,7 +1,13 @@
-import React from 'react';
+import React from "react";
+import GlobalStyle from "./styles/global";
 
-// import { Container } from './styles';
-
-const App = () => <div />;
+const App = () => {
+  return (
+    <>
+      <GlobalStyle />
+      <h2>Teste</h2>
+    </>
+  );
+};
 
 export default App;
