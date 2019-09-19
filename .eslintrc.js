@@ -17,7 +17,6 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module"
   },
-  parser: "babel-eslint",
   plugins: ["react", "jsx-a11y", "import", "react-hooks", "prettier"],
   rules: {
     "prettier/prettier": "error",
