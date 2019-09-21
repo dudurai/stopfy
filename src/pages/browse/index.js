@@ -7,7 +7,7 @@ const Browse = () => (
     <Title>Navegar</Title>
 
     <List>
-      <Playlist href="">
+      <Playlist to="/playlists/1">
         <img
           src="https://raru.co.za/cover/2015/05/26/2600812-l.jpg"
           alt="Capa"
@@ -16,7 +16,7 @@ const Browse = () => (
         <p>Listen this best playlist</p>
       </Playlist>
 
-      <Playlist href="">
+      <Playlist to="/playlists/1">
         <img
           src="https://raru.co.za/cover/2015/05/26/2600812-l.jpg"
           alt="Capa"
@@ -25,7 +25,7 @@ const Browse = () => (
         <p>Listen this best playlist</p>
       </Playlist>
 
-      <Playlist href="">
+      <Playlist to="/playlists/1">
         <img
           src="https://raru.co.za/cover/2015/05/26/2600812-l.jpg"
           alt="Capa"
@@ -34,7 +34,7 @@ const Browse = () => (
         <p>Listen this best playlist</p>
       </Playlist>
 
-      <Playlist href="">
+      <Playlist to="/playlists/1">
         <img
           src="https://raru.co.za/cover/2015/05/26/2600812-l.jpg"
           alt="Capa"
