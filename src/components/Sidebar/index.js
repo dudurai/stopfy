@@ -18,7 +18,8 @@ class Sidebar extends Component {
         id: PropTypes.number,
         title: PropTypes.string
       })
-    )
+    ),
+    loading: PropTypes.bool.isRequired
   };
 
   componentDidMount() {
@@ -80,7 +81,7 @@ class Sidebar extends Component {
             </li>
             {playlists.map(item => (
               <li key={item.id}>
-                <Link to={`playlists/${item.id}`}>{item.title}</Link>
+                <Link to={`/playlists/${item.id}`}>{item.title}</Link>
               </li>
             ))}
           </Nav>
