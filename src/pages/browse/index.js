@@ -1,49 +1,61 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as PlaylistsActions } from "../../store/ducks/playlists";
 
 import { Container, Title, List, Playlist } from "./styles";
 
-const Browse = () => (
-  <Container>
-    <Title>Navegar</Title>
+import Loading from "../../components/Loading";
 
-    <List>
-      <Playlist to="/playlists/1">
-        <img
-          src="https://raru.co.za/cover/2015/05/26/2600812-l.jpg"
-          alt="Capa"
-        />
-        <strong>The best rock All time</strong>
-        <p>Listen this best playlist</p>
-      </Playlist>
+class Browse extends Component {
+  static propTypes = {
+    getPlaylistsRequest: PropTypes.func.isRequired,
+    playlists: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        title: PropTypes.string,
+        thumbnail: PropTypes.string,
+        description: PropTypes.string
+      })
+    )
+  };
 
-      <Playlist to="/playlists/1">
-        <img
-          src="https://raru.co.za/cover/2015/05/26/2600812-l.jpg"
-          alt="Capa"
-        />
-        <strong>The best rock All time</strong>
-        <p>Listen this best playlist</p>
-      </Playlist>
+  componentDidMount() {
+    this.props.getPlaylistsRequest();
+  }
 
-      <Playlist to="/playlists/1">
-        <img
-          src="https://raru.co.za/cover/2015/05/26/2600812-l.jpg"
-          alt="Capa"
-        />
-        <strong>The best rock All time</strong>
-        <p>Listen this best playlist</p>
-      </Playlist>
+  render() {
+    const { playlists, loading } = this.props;
 
-      <Playlist to="/playlists/1">
-        <img
-          src="https://raru.co.za/cover/2015/05/26/2600812-l.jpg"
-          alt="Capa"
-        />
-        <strong>The best rock All time</strong>
-        <p>Listen this best playlist</p>
-      </Playlist>
-    </List>
-  </Container>
-);
+    return (
+      <Container>
+        <Title>Navegar {loading && <Loading />}</Title>
 
-export default Browse;
+        <List>
+          {playlists.map(item => (
+            <Playlist key={item.id} to={`/playlists/${item.id}`}>
+              <img src={item.thumbnail} alt={item.title} />
+              <strong>{item.title}</strong>
+              <p>{item.description}</p>
+            </Playlist>
+          ))}
+        </List>
+      </Container>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  playlists: state.playlists.data,
+  loading: state.playlists.loading
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(PlaylistsActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Browse);

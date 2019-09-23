@@ -5,15 +5,6 @@ import { Container, Header, SongList } from "./styles";
 import ClockIcon from "../../assets/images/clock.svg";
 import PlusIcon from "../../assets/images/plus.svg";
 
-let mapa = [
-  { a: "a" },
-  { a: "a" },
-  { a: "a" },
-  { a: "a" },
-  { a: "a" },
-  { a: "a" }
-];
-
 const Playlist = () => (
   <Container>
     <Header>
@@ -30,27 +21,27 @@ const Playlist = () => (
 
     <SongList cellPadding={0} cellSpacing={0}>
       <thead>
-        <th></th>
-        <th>Titulo</th>
-        <th>Artista</th>
-        <th>Album</th>
-        <th>
-          <img src={ClockIcon} alt="Duracao" />
-        </th>
+        <tr>
+          <th></th>
+          <th>Titulo</th>
+          <th>Artista</th>
+          <th>Album</th>
+          <th>
+            <img src={ClockIcon} alt="Duracao" />
+          </th>
+        </tr>
       </thead>
 
       <tbody>
-        {mapa.map(item => (
-          <tr>
-            <td>
-              <img src={PlusIcon} alt="Adicionar" />
-            </td>
-            <td>Papercut</td>
-            <td>Linkin Park</td>
-            <td>Hybrid Theory</td>
-            <td>3:49</td>
-          </tr>
-        ))}
+        <tr>
+          <td>
+            <img src={PlusIcon} alt="Adicionar" />
+          </td>
+          <td>Papercut</td>
+          <td>Linkin Park</td>
+          <td>Hybrid Theory</td>
+          <td>3:49</td>
+        </tr>
       </tbody>
     </SongList>
   </Container>
