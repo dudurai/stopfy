@@ -1,6 +1,9 @@
 import React from "react";
-
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import PropTypes from "prop-types";
 import Slider from "rc-slider";
+import Sound from "react-sound";
 
 import {
   Container,
@@ -20,15 +23,22 @@ import PauseIcon from "../../assets/images/pause.svg";
 import ForwardIcon from "../../assets/images/forward.svg";
 import RepeatIcon from "../../assets/images/repeat.svg";
 
-const Player = () => (
-  <Container>
-    <Current>
-      <img src="https://raru.co.za/cover/2015/05/26/2600812-l.jpg" alt="Capa" />
+import { Creators as PlayerActions } from "../../store/ducks/player";
 
-      <div>
-        <span>Times like these</span>
-        <small>Foo Fighters</small>
-      </div>
+const Player = ({ player: { currentSong, status }, play, pause }) => (
+  <Container>
+    {!!currentSong && <Sound url={currentSong.file} playStatus={status} />}
+
+    <Current>
+      {currentSong && (
+        <>
+          <img src={currentSong.thumbnail} alt="Capa" />
+          <div>
+            <span>{currentSong.title}</span>
+            <small>{currentSong.author}</small>
+          </div>
+        </>
+      )}
     </Current>
 
     <Progress>
@@ -39,12 +49,16 @@ const Player = () => (
         <button>
           <img src={BackwardIcon} alt="Backward" />
         </button>
-        <button>
-          <img src={PlayIcon} alt="Play" />
-        </button>
-        <button>
-          <img src={PauseIcon} alt="Pause" />
-        </button>
+        {!!currentSong && status === Sound.status.PLAYING ? (
+          <button onClick={pause}>
+            <img src={PauseIcon} alt="Pause" />
+          </button>
+        ) : (
+          <button onClick={play}>
+            <img src={PlayIcon} alt="Play" />
+          </button>
+        )}
+
         <button>
           <img src={ForwardIcon} alt="Forward" />
         </button>
@@ -79,4 +93,25 @@ const Player = () => (
   </Container>
 );
 
-export default Player;
+Player.proptype = {
+  player: PropTypes.shape({
+    currentSong: PropTypes.shape({
+      file: PropTypes.string
+    }),
+    status: PropTypes.string
+  }).isRequired,
+  play: PropTypes.func.isRequired,
+  pause: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  player: state.player
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(PlayerActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Player);
