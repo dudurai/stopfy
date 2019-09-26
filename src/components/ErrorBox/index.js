@@ -7,7 +7,6 @@ import { Creators as ErrorActions } from "../../store/ducks/error";
 import CloseIcon from "../../assets/images/close.svg";
 
 import { Container } from "./styles";
-import { string } from "postcss-selector-parser";
 
 const ErrorBox = ({ error: { message, visible }, hideError }) =>
   visible && (
@@ -19,7 +18,7 @@ const ErrorBox = ({ error: { message, visible }, hideError }) =>
     </Container>
   );
 
-ErrorBox.PropTypes = {
+ErrorBox.propTypes = {
   hideError: PropTypes.func.isRequired,
   error: PropTypes.shape({
     message: PropTypes.string,

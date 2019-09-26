@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as PlaylistDetailsActions } from "../../store/ducks/playlistDetails";
-import player, { Creators as PlayerActions } from "../../store/ducks/player";
+import { Creators as PlayerActions } from "../../store/ducks/player";
 
 import { Container, Header, SongList, SongItem } from "./styles";
 import Loading from "../../components/Loading";
@@ -16,7 +16,7 @@ class Playlist extends Component {
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.shape({
-        id: PropTypes.number
+        id: PropTypes.string
       })
     }).isRequired,
     loading: PropTypes.bool.isRequired,
@@ -104,7 +104,7 @@ class Playlist extends Component {
                   onClick={() => {
                     this.setState({ selectedSong: item.id });
                   }}
-                  onDoubleClick={() => loadSong(item)}
+                  onDoubleClick={() => loadSong(item, playlist.songs)}
                   selected={this.state.selectedSong === item.id}
                   playing={currentSong && currentSong.id === item.id}
                 >
