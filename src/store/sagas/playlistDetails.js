@@ -8,10 +8,14 @@ export function* getPlaylistDetails(action) {
   try {
     const { data: playlist } = yield call(
       api.get,
-      `/playlists/${action.payload.id}?_embed=songs `
+      `/playlist/${action.payload.id}`
     );
 
-    yield put(PlaylistDetailsActions.getPlaylistDetailsSuccess(playlist));
+    const { data: songs } = yield call(api.get, `/songs/${action.payload.id}`);
+
+    yield put(
+      PlaylistDetailsActions.getPlaylistDetailsSuccess({ ...playlist, songs })
+    );
   } catch (error) {
     yield put(
       ErrorActions.setError("Nao foi possivel obter os detalhes da playlist")

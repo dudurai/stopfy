@@ -16,10 +16,10 @@ class Sidebar extends Component {
     playlists: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number,
-        title: PropTypes.string
+        title: PropTypes.string,
       })
     ),
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -79,9 +79,9 @@ class Sidebar extends Component {
               <span>Playlists</span>
               {loading && <Loading />}
             </li>
-            {playlists.map(item => (
-              <li key={item.id}>
-                <Link to={`/playlists/${item.id}`}>{item.title}</Link>
+            {playlists.map((item) => (
+              <li key={item._id}>
+                <Link to={`/playlists/${item._id}`}>{item.title}</Link>
               </li>
             ))}
           </Nav>
@@ -95,15 +95,12 @@ class Sidebar extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(PlaylistsActions, dispatch);
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   playlists: state.playlists.data,
-  loading: state.playlists.loading
+  loading: state.playlists.loading,
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Sidebar);
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

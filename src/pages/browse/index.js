@@ -17,10 +17,10 @@ class Browse extends Component {
         id: PropTypes.number,
         title: PropTypes.string,
         thumbnail: PropTypes.string,
-        description: PropTypes.string
+        description: PropTypes.string,
       })
     ),
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -35,8 +35,8 @@ class Browse extends Component {
         <Title>Navegar {loading && <Loading />}</Title>
 
         <List>
-          {playlists.map(item => (
-            <Playlist key={item.id} to={`/playlists/${item.id}`}>
+          {playlists.map((item) => (
+            <Playlist key={item._id} to={`/playlists/${item._id}`}>
               <img src={item.thumbnail} alt={item.title} />
               <strong>{item.title}</strong>
               <p>{item.description}</p>
@@ -48,15 +48,12 @@ class Browse extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   playlists: state.playlists.data,
-  loading: state.playlists.loading
+  loading: state.playlists.loading,
 });
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(PlaylistsActions, dispatch);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Browse);
+export default connect(mapStateToProps, mapDispatchToProps)(Browse);
