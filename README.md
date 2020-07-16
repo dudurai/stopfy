@@ -1,4 +1,15 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Spotify Clone
+This is a learning project that create the Spotify Interface.
+
+[https://eduhdev-spotify.netlify.app/](https://eduhdev-spotify.netlify.app/)
+
+The backend repository of this application can be found here: [https://github.com/eduhdev/spotify-backend](https://github.com/eduhdev/spotify-backend)
+
+### Tools used to build this project
+* React Js
+* Redux
+* Redux Saga
+* React Song
 
 ## Available Scripts
 
